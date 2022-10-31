@@ -17,3 +17,6 @@
 - <code>docker login --username=\<your username\></code> and then enter password to login to docker hub
 - <code>docker tag \<image id\> \<username\>/repository:tag</code> to tag image
 - <code>docker push \<username\>/repository:tag</code> to push image
+
+#### Link to Docker hub repo
+[https://hub.docker.com/r/michosy/node-app](https://hub.docker.com/r/michosy/node-app)
