@@ -9,7 +9,6 @@
 - <code>docker logs \<container id\></code> to print app output
 - <code>curl -i localhost:49160</code> to call app on public port 49160
 - <code>docker kill \<container id\></code> to shutdown container
-- <code>docker </code>
 
 ### Memory and CPU limits
 - <code>docker run --memory=1g --cpus="1" -p 49160:80 -d \<repository name\></code> limits memory to 1GB and CPUs to 1
