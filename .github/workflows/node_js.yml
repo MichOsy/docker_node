@@ -23,15 +23,16 @@ jobs:
           # Full git history is needed to get a proper
           # list of changed files within `super-linter`
           fetch-depth: 0
-#       - name: Lint Code Base
-#         uses: github/super-linter@v4
-#         env:
-#           VALIDATE_ALL_CODEBASE: false
-#           DEFAULT_BRANCH: main
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
-#       - name: Set up Docker Buildx
-#         uses: docker/setup-buildx-action@v2
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Build Docker image
+        run: docker build . -t ${{ secrets.DOCKERHUB_REPO }}:latest
         
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -39,13 +40,18 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           
-#       - name: Build Docker image
-#         uses: docker/build-push-action@v3
-#         with:
-#           push: false
-      - name: build
-        run: docker build . -t ${{ secrets.DOCKERHUB_REPO }}:latest
-          
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKERHUB_REPO }}:latest
+        
+      - name: Pull Docker image
+        run: docker pull ${{ secrets.DOCKERHUB_REPO }}:latest
+        
+      - name: Run Docker image
+        run: docker run -p 49160:80 -d ${{ secrets.DOCKERHUB_REPO }}:latest
+        
+      - name: Calling app
+        id: curl
+        run: curl -i localhost:49160
+        
+      
         
