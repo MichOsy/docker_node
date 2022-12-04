@@ -49,9 +49,10 @@ jobs:
       - name: Run Docker image
         run: docker run -p 49160:80 -d ${{ secrets.DOCKERHUB_REPO }}:latest
         
-      - name: Calling app
-        id: curl
-        run: curl -i localhost:49160
+      - name: Call app
+        run: |
+          timeout 5 
+          curl -i localhost:49160
         
       
         
