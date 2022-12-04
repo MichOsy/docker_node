@@ -39,9 +39,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           
-      - name: Build and push Docker image
+      - name: Build Docker image
         uses: docker/build-push-action@v3
         with:
-          push: true
-          tags: ${{ secrets.DOCKERHUB_REPO }}:latest
+          push: false
+          
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKERHUB_REPO }}:latest
         
