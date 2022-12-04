@@ -34,6 +34,6 @@ jobs:
       - name: Build Docker image
         uses: docker/build-push-action@v3
         with:
-            pushImage: false
+          push: false
 
         
