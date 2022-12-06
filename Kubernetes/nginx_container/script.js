@@ -7,9 +7,4 @@ $(document).ready(function () {
             $("#backend").text(data);
         }
     });
-    // $.get("/api/", function (result) {
-    //     $("#backend").text(
-    //         result
-    //     );
-    // });
  });
